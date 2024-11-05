@@ -22,7 +22,7 @@ public class Client extends BaseEntity {
 
     private String email;
 
-    private boolean sex;
+    private boolean isMale;
 
     private int age;
 

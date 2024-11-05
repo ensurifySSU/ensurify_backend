@@ -17,7 +17,10 @@ public enum ErrorStatus implements BaseErrorCode {
     _ENUM_TYPE_NOT_MATCH(HttpStatus.BAD_REQUEST, "COMMON404", "일치하는 타입이 없습니다"),
 
     // Clerk
-    CLERK_NOT_FOUND(HttpStatus.NOT_FOUND, "CLERK400", "존재하지 않는 행원 정보입니다.");
+    CLERK_NOT_FOUND(HttpStatus.NOT_FOUND, "CLERK400", "존재하지 않는 행원 정보입니다."),
+
+    // Client
+    CLIENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CLIENT400", "존재하지 않는 고객 정보입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
