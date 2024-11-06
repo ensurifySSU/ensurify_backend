@@ -4,13 +4,15 @@ import com.example.inssurify.common.apiPayload.code.status.ErrorStatus;
 import com.example.inssurify.common.apiPayload.exception.GeneralException;
 import com.example.inssurify.domain.Clerk;
 import com.example.inssurify.domain.Client;
-import com.example.inssurify.dto.response.GetClerkInfoResponse;
 import com.example.inssurify.dto.response.GetClientInfoResponse;
+import com.example.inssurify.dto.response.GetClientListResponse;
 import com.example.inssurify.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -19,9 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ClientService {
 
     private final ClientRepository clientRepository;
+    private final ClerkService  clerkService;
 
     /**
-     * 행원 정보 조회
+     * 고객 정보 조회
      */
     public GetClientInfoResponse getClientInfo(Long clientId) {
 
@@ -38,4 +41,26 @@ public class ClientService {
                 .build();
     }
 
+    /**
+     * 고객 목록 조회
+     */
+    public GetClientListResponse.clientList getClientList(Long clerkId) {
+
+        Clerk clerk = clerkService.findById(clerkId);
+        List<Client> clients = clerk.getBank().getClientList();
+
+        log.info("고객 목록 조회: clientsNum={}", clients.size());
+
+        List<GetClientListResponse.clientInfo> clientInfos = clients.stream()
+                .map(client -> {
+                    return GetClientListResponse.clientInfo.builder()
+                            .name(client.getName())
+                            .email(client.getEmail())
+                            .build();
+                }).toList();
+
+        return GetClientListResponse.clientList.builder()
+                .clientList(clientInfos)
+                .build();
+    }
 }

@@ -6,10 +6,7 @@ import com.example.inssurify.service.ClerkService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -23,8 +20,8 @@ public class ClerkController {
     private final ClerkService clerkService;
 
     // 행원 정보 조회
-    @GetMapping("/{clerkId}")
-    public BasicResponse<GetClerkInfoResponse> getClerkInfo(@PathVariable Long clerkId){
+    @GetMapping
+    public BasicResponse<GetClerkInfoResponse> getClerkInfo(@RequestHeader Long clerkId){
 
         GetClerkInfoResponse clerkInfo = clerkService.getClerkInfo(clerkId);
 
