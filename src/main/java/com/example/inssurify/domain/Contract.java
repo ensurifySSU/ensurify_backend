@@ -5,6 +5,9 @@ import com.example.inssurify.domain.enums.ContractCategory;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @Getter
@@ -25,5 +28,9 @@ public class Contract extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private ContractCategory category;
+
+    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ContractKeyword> keywordList = new ArrayList<>();
 }
 

@@ -1,9 +1,11 @@
 package com.example.inssurify.service;
 
+import com.example.inssurify.common.apiPayload.code.status.ErrorStatus;
+import com.example.inssurify.common.apiPayload.exception.GeneralException;
 import com.example.inssurify.domain.Clerk;
-import com.example.inssurify.domain.Client;
 import com.example.inssurify.domain.Contract;
-import com.example.inssurify.dto.response.GetClientListResponse;
+import com.example.inssurify.domain.ContractKeyword;
+import com.example.inssurify.dto.response.GetContractDetailsResponse;
 import com.example.inssurify.dto.response.GetContractListResponse;
 import com.example.inssurify.repository.ContractRepository;
 import lombok.RequiredArgsConstructor;
@@ -45,4 +47,24 @@ public class ContractService {
                 .contractList(contractInfos)
                 .build();
     }
+
+    /**
+     * 계약서 상세 조회
+     */
+    public GetContractDetailsResponse getContractDetails(Long contractId) {
+
+        Contract contract = contractRepository.findById(contractId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.CONTRACT_NOT_FOUND));
+
+        List<String> keywords = contract.getKeywordList().stream()
+                .map(ContractKeyword::getKeyword).toList();
+
+        return GetContractDetailsResponse.builder()
+                .name(contract.getName())
+                .category(contract.getCategory())
+                .pdfUrl(contract.getPdfUrl())
+                .keywords(keywords)
+                .build();
+    }
+
 }

@@ -20,7 +20,10 @@ public enum ErrorStatus implements BaseErrorCode {
     CLERK_NOT_FOUND(HttpStatus.NOT_FOUND, "CLERK400", "존재하지 않는 행원 정보입니다."),
 
     // Client
-    CLIENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CLIENT400", "존재하지 않는 고객 정보입니다.");
+    CLIENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CLIENT400", "존재하지 않는 고객 정보입니다."),
+
+    // Contract
+    CONTRACT_NOT_FOUND(HttpStatus.NOT_FOUND, "CONTRACT400", "존재하지 않는 계약서 정보입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
