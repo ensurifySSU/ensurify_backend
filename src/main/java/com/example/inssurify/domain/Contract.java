@@ -1,6 +1,7 @@
 package com.example.inssurify.domain;
 
 import com.example.inssurify.domain.common.BaseEntity;
+import com.example.inssurify.domain.enums.ContractCategory;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,5 +22,8 @@ public class Contract extends BaseEntity {
     private String name;
 
     private String pdfUrl;
+
+    @Enumerated(EnumType.STRING)
+    private ContractCategory category;
 }
 
