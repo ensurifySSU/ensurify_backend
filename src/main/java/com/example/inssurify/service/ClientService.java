@@ -54,6 +54,7 @@ public class ClientService {
         List<GetClientListResponse.clientInfo> clientInfos = clients.stream()
                 .map(client -> {
                     return GetClientListResponse.clientInfo.builder()
+                            .clientId(client.getId())
                             .name(client.getName())
                             .email(client.getEmail())
                             .build();

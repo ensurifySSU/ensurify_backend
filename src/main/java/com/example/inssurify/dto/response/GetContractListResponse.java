@@ -1,5 +1,6 @@
 package com.example.inssurify.dto.response;
 
+import com.example.inssurify.domain.enums.ContractCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,25 +8,25 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-public class GetClientListResponse {
+public class GetContractListResponse {
 
     @Builder
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class clientList {
+    public static class contractList {
 
-        private List<clientInfo> clientList;
+        private List<contractInfo> contractList;
     }
 
     @Builder
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class clientInfo {
+    public static class contractInfo {
 
-        private Long clientId;
+        private Long contractId;
         private String name;
-        private String email;
+        private ContractCategory category;
     }
 }
