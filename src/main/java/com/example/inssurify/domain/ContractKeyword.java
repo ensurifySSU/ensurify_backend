@@ -15,8 +15,8 @@ public class ContractKeyword extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "contract_id")
-    private Contract contract;
+    @JoinColumn(name = "contract_document_id")
+    private ContractDocument contractDocument;
 
     private String keyword;
 }

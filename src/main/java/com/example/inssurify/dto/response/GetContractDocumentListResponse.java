@@ -8,24 +8,24 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-public class GetContractListResponse {
+public class GetContractDocumentListResponse {
 
     @Builder
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class contractList {
+    public static class contractDocumentList {
 
-        private List<contractInfo> contractList;
+        private List<contractDocumentInfo> contractDocumentList;
     }
 
     @Builder
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class contractInfo {
+    public static class contractDocumentInfo {
 
-        private Long contractId;
+        private Long contractDocumentId;
         private String name;
         private ContractCategory category;
     }

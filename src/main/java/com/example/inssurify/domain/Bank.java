@@ -25,5 +25,5 @@ public class Bank extends BaseEntity {
 
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<Contract> contractList = new ArrayList<>();
+    private List<ContractDocument> contractDocumentList = new ArrayList<>();
 }

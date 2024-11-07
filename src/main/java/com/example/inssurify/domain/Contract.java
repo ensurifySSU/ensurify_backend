@@ -1,12 +1,8 @@
 package com.example.inssurify.domain;
 
 import com.example.inssurify.domain.common.BaseEntity;
-import com.example.inssurify.domain.enums.ContractCategory;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -19,18 +15,14 @@ public class Contract extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bank_id")
-    private Bank bank;
+    @JoinColumn(name = "contract_document_id")
+    private ContractDocument contract;
 
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clerk_id")
+    private Clerk clerk;
 
-    private String pdfUrl;
-
-    @Enumerated(EnumType.STRING)
-    private ContractCategory category;
-
-    @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    private List<ContractKeyword> keywordList = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private Client client;
 }
-

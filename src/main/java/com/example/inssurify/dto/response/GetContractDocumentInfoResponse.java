@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetContractDetailsResponse {
+public class GetContractDocumentInfoResponse {
 
     private String name;
     private ContractCategory category;
