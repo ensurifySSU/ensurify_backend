@@ -23,7 +23,7 @@ public enum ErrorStatus implements BaseErrorCode {
     CLIENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CLIENT400", "존재하지 않는 고객 정보입니다."),
 
     // Contract Document
-    CONTRACT_DOCUMENT__NOT_FOUND(HttpStatus.NOT_FOUND, "CONTRACT400", "존재하지 않는 계약서 정보입니다.");
+    CONTRACT_DOCUMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CONTRACT400", "존재하지 않는 계약서 정보입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;

@@ -53,8 +53,7 @@ public class ContractDocumentService {
      */
     public GetContractDocumentInfoResponse getContractDocumentInfo(Long contractDocumentId) {
 
-        ContractDocument contractDocument = contractDocumentRepository.findById(contractDocumentId)
-                .orElseThrow(() -> new GeneralException(ErrorStatus.CONTRACT_DOCUMENT__NOT_FOUND));
+        ContractDocument contractDocument = findById(contractDocumentId);
 
         List<String> keywords = contractDocument.getKeywordList().stream()
                 .map(ContractKeyword::getKeyword).toList();
@@ -67,4 +66,9 @@ public class ContractDocumentService {
                 .build();
     }
 
+    // id로 계약서 검색
+    public ContractDocument findById(Long docId) {
+        return contractDocumentRepository.findById(docId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.CONTRACT_DOCUMENT_NOT_FOUND));
+    }
 }

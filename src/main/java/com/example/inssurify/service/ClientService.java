@@ -28,8 +28,7 @@ public class ClientService {
      */
     public GetClientInfoResponse getClientInfo(Long clientId) {
 
-        Client client = clientRepository.findById(clientId)
-                .orElseThrow(() -> new GeneralException(ErrorStatus.CLIENT_NOT_FOUND));
+        Client client = findById(clientId);
 
         String gender = client.isMale() ? "남" : "여";
 
@@ -63,5 +62,11 @@ public class ClientService {
         return GetClientListResponse.clientList.builder()
                 .clientList(clientInfos)
                 .build();
+    }
+
+    // id로 고객 검색
+    public Client findById(Long memberId) {
+        return clientRepository.findById(memberId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.CLIENT_NOT_FOUND));
     }
 }
