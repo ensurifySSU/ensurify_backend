@@ -1,15 +1,19 @@
 package com.example.inssurify.domain;
 
 import com.example.inssurify.domain.common.BaseEntity;
+import com.example.inssurify.domain.enums.ContractCategory;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Client extends BaseEntity {
+public class ContractDocument extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,11 +24,13 @@ public class Client extends BaseEntity {
 
     private String name;
 
-    private String email;
+    private String pdfUrl;
 
-    private boolean isMale;
+    @Enumerated(EnumType.STRING)
+    private ContractCategory category;
 
-    private int age;
-
-    private String job;
+    @OneToMany(mappedBy = "contractDocument", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ContractKeyword> keywordList = new ArrayList<>();
 }
+

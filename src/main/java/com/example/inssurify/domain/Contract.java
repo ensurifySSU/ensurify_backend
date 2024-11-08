@@ -15,11 +15,14 @@ public class Contract extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bank_id")
-    private Bank bank;
+    @JoinColumn(name = "contract_document_id")
+    private ContractDocument contractDocument;
 
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "clerk_id")
+    private Clerk clerk;
 
-    private String pdfUrl;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    private Client client;
 }
-

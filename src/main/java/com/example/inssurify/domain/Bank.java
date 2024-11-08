@@ -4,6 +4,9 @@ import com.example.inssurify.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @Getter
@@ -15,4 +18,12 @@ public class Bank extends BaseEntity {
     private Long id;
 
     private String name;
+
+    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Client> clientList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<ContractDocument> contractDocumentList = new ArrayList<>();
 }

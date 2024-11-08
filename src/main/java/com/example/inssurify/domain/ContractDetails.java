@@ -1,6 +1,6 @@
 package com.example.inssurify.domain;
 
-import com.example.inssurify.domain.common.BaseEntity;
+import com.example.inssurify.domain.enums.ContractAction;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +9,8 @@ import lombok.*;
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ContractHistory extends BaseEntity {
+public class ContractDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,7 +19,12 @@ public class ContractHistory extends BaseEntity {
     @JoinColumn(name = "contract_id")
     private Contract contract;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clerk_id")
-    private Clerk clerk;
+    @Enumerated(EnumType.STRING)
+    private ContractAction action;
+
+    private String xAxis;
+
+    private String yAxis;
+
+    private String signature;
 }
