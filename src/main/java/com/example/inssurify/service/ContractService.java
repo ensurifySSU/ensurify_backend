@@ -6,11 +6,15 @@ import com.example.inssurify.domain.Contract;
 import com.example.inssurify.domain.ContractDocument;
 import com.example.inssurify.dto.request.CreateContractRequest;
 import com.example.inssurify.dto.response.CreateContractResponse;
+import com.example.inssurify.dto.response.GetContractListResponse;
 import com.example.inssurify.repository.ContractRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -43,6 +47,38 @@ public class ContractService {
 
         return CreateContractResponse.builder()
                 .contractId(newContract.getId())
+                .build();
+    }
+
+    /**
+     * 계약 목록 조회
+     */
+    public GetContractListResponse.contractList getContractList(Long clerkId, Long docId) {
+
+        Clerk clerk = clerkService.findById(clerkId);
+        List<Contract> contracts = clerk.getContractList();
+
+        log.info("계약 목록 조회: contractsNum={}", contracts.size());
+
+        List<GetContractListResponse.contractInfo> contractInfos = contracts.stream()
+                .filter(contract -> docId == null || contract.getContractDocument().getId().equals(docId))
+                .map(contract -> {
+                    ContractDocument document = contract.getContractDocument();
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+                    String formattedDate = contract.getCreatedAt().format(formatter);
+
+                    return GetContractListResponse.contractInfo.builder()
+                            .contractId(contract.getId())
+                            .name(document.getName())
+                            .category(document.getCategory())
+                            .client(contract.getClient().getName())
+                            .date(formattedDate)
+                            .build();
+                }).toList();
+
+        return GetContractListResponse.contractList.builder()
+                .contractList(contractInfos)
                 .build();
     }
 }

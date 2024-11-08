@@ -3,6 +3,8 @@ package com.example.inssurify.controller;
 import com.example.inssurify.common.apiPayload.BasicResponse;
 import com.example.inssurify.dto.request.CreateContractRequest;
 import com.example.inssurify.dto.response.CreateContractResponse;
+import com.example.inssurify.dto.response.GetClientListResponse;
+import com.example.inssurify.dto.response.GetContractListResponse;
 import com.example.inssurify.service.ContractService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,16 @@ public class ContractController {
         CreateContractResponse response = contractService.createContract(clerkId, request);
 
         return BasicResponse.onSuccess(response);
+    }
+
+    // 계약 목록 조회
+    @GetMapping
+    public BasicResponse<GetContractListResponse.contractList> getContractList(@RequestHeader Long clerkId,
+                                                                               @RequestParam(defaultValue = "") Long docId){
+
+        GetContractListResponse.contractList contractList = contractService.getContractList(clerkId, docId);
+
+        return BasicResponse.onSuccess(contractList);
     }
 }
 
