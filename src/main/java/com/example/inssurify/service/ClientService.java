@@ -50,6 +50,7 @@ public class ClientService {
 
         log.info("고객 목록 조회: clientsNum={}", clients.size());
 
+        // 개별 조회로 인한 N+1 문제 발생 -> 관련 학습 후 보완 필요
         List<GetClientListResponse.clientInfo> clientInfos = clients.stream()
                 .map(client -> {
                     return GetClientListResponse.clientInfo.builder()
