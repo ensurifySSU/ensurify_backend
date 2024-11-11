@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/clients")
 @RequiredArgsConstructor
@@ -31,7 +33,11 @@ public class ClientController {
 
     // 고객 목록 조회
     @GetMapping
-    public BasicResponse<GetClientListResponse.clientList> getClientList(@RequestHeader Long clerkId){
+    public BasicResponse<GetClientListResponse.clientList> getClientList(Principal principal){
+
+        Long clerkId = Long.parseLong(principal.getName());
+
+        log.info("행원 정보 조회: clerkId={}", clerkId);
 
         GetClientListResponse.clientList clientList = clientService.getClientList(clerkId);
 

@@ -36,7 +36,9 @@ public class ClerkController {
 
     // 행원 정보 조회
     @GetMapping
-    public BasicResponse<GetClerkInfoResponse> getClerkInfo(@RequestHeader Long clerkId){
+    public BasicResponse<GetClerkInfoResponse> getClerkInfo(Principal principal){
+
+        Long clerkId = Long.parseLong(principal.getName());
 
         GetClerkInfoResponse clerkInfo = clerkService.getClerkInfo(clerkId);
 

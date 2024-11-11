@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/contracts")
 @RequiredArgsConstructor
@@ -22,8 +24,10 @@ public class ContractController {
 
     // 계약 생성
     @PostMapping
-    public BasicResponse<CreateContractResponse> postContract(@RequestHeader Long clerkId,
+    public BasicResponse<CreateContractResponse> postContract(Principal principal,
                                                               @RequestBody @Valid CreateContractRequest request){
+
+        Long clerkId = Long.parseLong(principal.getName());
 
         CreateContractResponse response = contractService.createContract(clerkId, request);
 
@@ -32,8 +36,10 @@ public class ContractController {
 
     // 계약 목록 조회
     @GetMapping
-    public BasicResponse<GetContractListResponse.contractList> getContractList(@RequestHeader Long clerkId,
+    public BasicResponse<GetContractListResponse.contractList> getContractList(Principal principal,
                                                                                @RequestParam(required = false) Long docId){
+
+        Long clerkId = Long.parseLong(principal.getName());
 
         GetContractListResponse.contractList contractList = contractService.getContractList(clerkId, docId);
 
