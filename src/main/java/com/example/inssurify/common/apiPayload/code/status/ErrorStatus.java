@@ -18,12 +18,17 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // Clerk
     CLERK_NOT_FOUND(HttpStatus.NOT_FOUND, "CLERK400", "존재하지 않는 행원 정보입니다."),
+    INVALID_PASSWORD(HttpStatus.CONFLICT, "CLERK401", "적절하지 않은 패스워드입니다."),
 
     // Client
     CLIENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CLIENT400", "존재하지 않는 고객 정보입니다."),
 
     // Contract Document
-    CONTRACT_DOCUMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CONTRACT400", "존재하지 않는 계약서 정보입니다.");
+    CONTRACT_DOCUMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CONTRACT400", "존재하지 않는 계약서 정보입니다."),
+
+    // JWT
+    TOKEN_INVALID(HttpStatus.UNAUTHORIZED, "JWT400", "유효하지 않은 토큰입니다."),
+    TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "JWT401", "만료된 토큰입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
