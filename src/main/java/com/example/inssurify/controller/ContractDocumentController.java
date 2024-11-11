@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/contract-docs")
 @RequiredArgsConstructor
@@ -21,7 +23,9 @@ public class ContractDocumentController {
 
     // 계약서 목록 조회
     @GetMapping
-    public BasicResponse<GetContractDocumentListResponse.contractDocumentList> getContractDocumentList(@RequestHeader Long clerkId){
+    public BasicResponse<GetContractDocumentListResponse.contractDocumentList> getContractDocumentList(Principal principal){
+
+        Long clerkId = Long.parseLong(principal.getName());
 
         GetContractDocumentListResponse.contractDocumentList contractList = contractDocumentService.getContractDocumentList(clerkId);
 
