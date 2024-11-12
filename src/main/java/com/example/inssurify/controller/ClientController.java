@@ -22,9 +22,11 @@ public class ClientController {
 
     // 고객 정보 조회
     @GetMapping("/{clientId}")
-    public BasicResponse<GetClientInfoResponse> getClientInfo(@PathVariable Long clientId){
+    public BasicResponse<GetClientInfoResponse> getClientInfo(Principal principal, @PathVariable Long clientId){
 
-        GetClientInfoResponse clientInfo = clientService.getClientInfo(clientId);
+        Long clerkId = Long.parseLong(principal.getName());
+
+        GetClientInfoResponse clientInfo = clientService.getClientInfo(clerkId, clientId);
 
         log.info("고객 정보 조회: clientId={}", clientId);
 

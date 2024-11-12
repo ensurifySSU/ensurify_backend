@@ -26,9 +26,14 @@ public class ClientService {
     /**
      * 고객 정보 조회
      */
-    public GetClientInfoResponse getClientInfo(Long clientId) {
+    public GetClientInfoResponse getClientInfo(Long clerkId, Long clientId) {
+
+        Clerk clerk = clerkService.findById(clerkId);
 
         Client client = findById(clientId);
+
+        if(clerk.getBank() != client.getBank())
+            throw new GeneralException(ErrorStatus.CLIENT_NOT_REGISTERED);
 
         String gender = client.isMale() ? "남" : "여";
 

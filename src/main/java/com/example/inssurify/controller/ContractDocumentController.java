@@ -34,9 +34,11 @@ public class ContractDocumentController {
 
     // 계약서 상세 조회
     @GetMapping("/{contractDocumentId}")
-    public BasicResponse<GetContractDocumentInfoResponse> getContractDocumentInfo(@PathVariable Long contractDocumentId){
+    public BasicResponse<GetContractDocumentInfoResponse> getContractDocumentInfo(Principal principal, @PathVariable Long contractDocumentId){
 
-        GetContractDocumentInfoResponse contractDocumentInfo = contractDocumentService.getContractDocumentInfo(contractDocumentId);
+        Long clerkId = Long.parseLong(principal.getName());
+
+        GetContractDocumentInfoResponse contractDocumentInfo = contractDocumentService.getContractDocumentInfo(clerkId, contractDocumentId);
 
         log.info("계약서 상세 조회: contractDocId={}", contractDocumentId);
 

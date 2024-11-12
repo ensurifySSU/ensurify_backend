@@ -51,9 +51,14 @@ public class ContractDocumentService {
     /**
      * 계약서 상세 조회
      */
-    public GetContractDocumentInfoResponse getContractDocumentInfo(Long contractDocumentId) {
+    public GetContractDocumentInfoResponse getContractDocumentInfo(Long clerkId, Long contractDocumentId) {
+
+        Clerk clerk = clerkService.findById(clerkId);
 
         ContractDocument contractDocument = findById(contractDocumentId);
+
+        if(clerk.getBank() != contractDocument.getBank())
+            throw new GeneralException(ErrorStatus.CONTRACT_DOCUMENT_NOT_REGISTERED);
 
         List<String> keywords = contractDocument.getKeywordList().stream()
                 .map(ContractKeyword::getKeyword).toList();
