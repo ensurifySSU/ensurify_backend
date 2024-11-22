@@ -49,7 +49,11 @@ public class SecurityConfig {
 
                 // 인증, 인가 설정
                 .authorizeHttpRequests((auth) -> auth
-                        .anyRequest().permitAll())
+                        .requestMatchers("/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**")
+                        .permitAll()
+                        .requestMatchers("/clerks/login")
+                        .permitAll()
+                        .anyRequest().authenticated())
 
                 // 헤더를 확인할 커스텀 필터 추가
                 .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
