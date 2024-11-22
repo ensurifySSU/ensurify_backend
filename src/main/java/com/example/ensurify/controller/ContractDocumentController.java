@@ -4,6 +4,8 @@ import com.example.ensurify.common.apiPayload.BasicResponse;
 import com.example.ensurify.dto.response.GetContractDocumentInfoResponse;
 import com.example.ensurify.dto.response.GetContractDocumentListResponse;
 import com.example.ensurify.service.ContractDocumentService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -16,13 +18,13 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @Validated
 @Slf4j
+@Tag(name = "ContractDocument", description = "ContractDocument 관련 API입니다.")
 public class ContractDocumentController {
 
     private final ContractDocumentService contractDocumentService;
 
-
-    // 계약서 목록 조회
     @GetMapping
+    @Operation(summary = "계약서 목록 조회", description = "계약서 목록을 조회합니다.")
     public BasicResponse<GetContractDocumentListResponse.contractDocumentList> getContractDocumentList(Principal principal){
 
         Long clerkId = Long.parseLong(principal.getName());
@@ -32,8 +34,8 @@ public class ContractDocumentController {
         return BasicResponse.onSuccess(contractList);
     }
 
-    // 계약서 상세 조회
     @GetMapping("/{contractDocumentId}")
+    @Operation(summary = "계약서 상세 조회", description = "계약서를 상세 조회합니다.")
     public BasicResponse<GetContractDocumentInfoResponse> getContractDocumentInfo(Principal principal, @PathVariable Long contractDocumentId){
 
         Long clerkId = Long.parseLong(principal.getName());
