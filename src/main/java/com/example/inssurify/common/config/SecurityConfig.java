@@ -49,9 +49,7 @@ public class SecurityConfig {
 
                 // 인증, 인가 설정
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/clerks/login")
-                        .permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().permitAll())
 
                 // 헤더를 확인할 커스텀 필터 추가
                 .addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
