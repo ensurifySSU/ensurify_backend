@@ -5,6 +5,8 @@ import com.example.ensurify.dto.request.CreateContractRequest;
 import com.example.ensurify.dto.response.CreateContractResponse;
 import com.example.ensurify.dto.response.GetContractListResponse;
 import com.example.ensurify.service.ContractService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +20,13 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @Validated
 @Slf4j
+@Tag(name = "Contract", description = "Contract 관련 API입니다.")
 public class ContractController {
 
     private final ContractService contractService;
 
-    // 계약 생성
     @PostMapping
+    @Operation(summary = "계약 생성", description = "계약을 생성합니다.")
     public BasicResponse<CreateContractResponse> postContract(Principal principal,
                                                               @RequestBody @Valid CreateContractRequest request){
 
@@ -34,8 +37,8 @@ public class ContractController {
         return BasicResponse.onSuccess(response);
     }
 
-    // 계약 목록 조회
     @GetMapping
+    @Operation(summary = "계약 목록 조회", description = "계약 목록을 조회합니다.")
     public BasicResponse<GetContractListResponse.contractList> getContractList(Principal principal,
                                                                                @RequestParam(required = false) Long docId){
 
