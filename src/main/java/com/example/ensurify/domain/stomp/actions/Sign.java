@@ -16,6 +16,10 @@ public class Sign extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int signNum;
+
+    private String signImg;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id")
     private MeetingRoom room;

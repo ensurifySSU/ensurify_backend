@@ -17,6 +17,8 @@ public class Check extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int checkNum;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id")
     private MeetingRoom room;
