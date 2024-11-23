@@ -26,7 +26,6 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // Contract Document
     CONTRACT_DOCUMENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CONTRACT400", "존재하지 않는 계약서 정보입니다."),
-    CONTRACT_DOCUMENT_NOT_REGISTERED(HttpStatus.NOT_FOUND, "CONTRACT401", "우리 은행의 계약서가 아닙니다."),
 
     // JWT
     TOKEN_INVALID(HttpStatus.UNAUTHORIZED, "JWT400", "유효하지 않은 토큰입니다."),

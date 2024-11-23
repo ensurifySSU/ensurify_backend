@@ -21,19 +21,13 @@ import java.util.List;
 public class ClientService {
 
     private final ClientRepository clientRepository;
-    private final ClerkService  clerkService;
 
     /**
      * 고객 정보 조회
      */
-    public GetClientInfoResponse getClientInfo(Long clerkId, Long clientId) {
-
-        Clerk clerk = clerkService.findById(clerkId);
+    public GetClientInfoResponse getClientInfo(Long clientId) {
 
         Client client = findById(clientId);
-
-        if(clerk.getBank() != client.getBank())
-            throw new GeneralException(ErrorStatus.CLIENT_NOT_REGISTERED);
 
         String gender = client.isMale() ? "남" : "여";
 
@@ -48,10 +42,9 @@ public class ClientService {
     /**
      * 고객 목록 조회
      */
-    public GetClientListResponse.clientList getClientList(Long clerkId) {
+    public GetClientListResponse.clientList getClientList() {
 
-        Clerk clerk = clerkService.findById(clerkId);
-        List<Client> clients = clerk.getBank().getClientList();
+        List<Client> clients = clientRepository.findAll();
 
         log.info("고객 목록 조회: clientsNum={}", clients.size());
 
