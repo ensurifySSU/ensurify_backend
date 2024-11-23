@@ -20,7 +20,7 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "clerk", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private List<Contract> contractList = new ArrayList<>();
+    private List<ContractHistory> contractHistoryList = new ArrayList<>();
 
     private String name;
 

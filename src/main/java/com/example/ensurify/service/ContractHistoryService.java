@@ -2,12 +2,12 @@ package com.example.ensurify.service;
 
 import com.example.ensurify.domain.User;
 import com.example.ensurify.domain.Client;
-import com.example.ensurify.domain.Contract;
+import com.example.ensurify.domain.ContractHistory;
 import com.example.ensurify.domain.ContractDocument;
 import com.example.ensurify.dto.request.CreateContractRequest;
 import com.example.ensurify.dto.response.CreateContractResponse;
 import com.example.ensurify.dto.response.GetContractListResponse;
-import com.example.ensurify.repository.ContractRepository;
+import com.example.ensurify.repository.ContractHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,9 +20,9 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class ContractService {
+public class ContractHistoryService {
 
-    private final ContractRepository contractRepository;
+    private final ContractHistoryRepository contractHistoryRepository;
     private final UserService userService;
     private final ClientService clientService;
     private final ContractDocumentService contractDocumentService;
@@ -37,16 +37,16 @@ public class ContractService {
         Client client = clientService.findById(request.getClientId());
         ContractDocument document = contractDocumentService.findById(request.getContractDocumentId());
 
-        Contract newContract = Contract.builder()
+        ContractHistory newContractHistory = ContractHistory.builder()
                 .contractDocument(document)
                 .user(user)
                 .client(client)
                 .build();
 
-        contractRepository.save(newContract);
+        contractHistoryRepository.save(newContractHistory);
 
         return CreateContractResponse.builder()
-                .contractId(newContract.getId())
+                .contractId(newContractHistory.getId())
                 .build();
     }
 
@@ -56,24 +56,25 @@ public class ContractService {
     public GetContractListResponse.contractList getContractList(Long clerkId, Long docId) {
 
         User user = userService.findById(clerkId);
-        List<Contract> contracts = user.getContractList();
+        List<ContractHistory> contractHistories = user.getContractHistoryList();
 
-        log.info("계약 목록 조회: contractsNum={}", contracts.size());
+        log.info("계약 내역 목록 조회: contractHistoryNum={}", contractHistories.size());
 
-        List<GetContractListResponse.contractInfo> contractInfos = contracts.stream()
-                .filter(contract -> docId == null || contract.getContractDocument().getId().equals(docId))
-                .map(contract -> {
-                    ContractDocument document = contract.getContractDocument();
+        List<GetContractListResponse.contractInfo> contractInfos = contractHistories.stream()
+                .filter(contractHistory -> docId == null || contractHistory.getContractDocument().getId().equals(docId))
+                .map(contractHistory -> {
+                    ContractDocument document = contractHistory.getContractDocument();
 
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
-                    String formattedDate = contract.getCreatedAt().format(formatter);
+                    String formattedDate = contractHistory.getCreatedAt().format(formatter);
 
                     return GetContractListResponse.contractInfo.builder()
-                            .contractId(contract.getId())
+                            .contractId(contractHistory.getId())
                             .name(document.getName())
                             .category(document.getCategory())
-                            .client(contract.getClient().getName())
+                            .client(contractHistory.getClient().getName())
                             .date(formattedDate)
+                            .pdfUrl(contractHistory.getPdfUrl())
                             .build();
                 }).toList();
 
