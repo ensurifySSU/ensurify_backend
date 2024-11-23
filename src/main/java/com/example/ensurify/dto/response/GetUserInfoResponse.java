@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetClerkInfoResponse {
+public class GetUserInfoResponse {
 
     @Schema(description = "행원명", nullable = false, example = "짱구")
     private String name;

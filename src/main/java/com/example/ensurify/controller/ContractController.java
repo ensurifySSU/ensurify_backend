@@ -30,9 +30,9 @@ public class ContractController {
     public BasicResponse<CreateContractResponse> postContract(Principal principal,
                                                               @RequestBody @Valid CreateContractRequest request){
 
-        Long clerkId = Long.parseLong(principal.getName());
+        Long userId = Long.parseLong(principal.getName());
 
-        CreateContractResponse response = contractService.createContract(clerkId, request);
+        CreateContractResponse response = contractService.createContract(userId, request);
 
         return BasicResponse.onSuccess(response);
     }
@@ -42,9 +42,9 @@ public class ContractController {
     public BasicResponse<GetContractListResponse.contractList> getContractList(Principal principal,
                                                                                @RequestParam(required = false) Long docId){
 
-        Long clerkId = Long.parseLong(principal.getName());
+        Long userId = Long.parseLong(principal.getName());
 
-        GetContractListResponse.contractList contractList = contractService.getContractList(clerkId, docId);
+        GetContractListResponse.contractList contractList = contractService.getContractList(userId, docId);
 
         return BasicResponse.onSuccess(contractList);
     }

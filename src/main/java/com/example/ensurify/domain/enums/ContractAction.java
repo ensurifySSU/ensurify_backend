@@ -1,5 +1,5 @@
 package com.example.ensurify.domain.enums;
 
 public enum ContractAction {
-    CHECK, SIGN
+    CHECK, SIGN, MOVE_PAGE
 }

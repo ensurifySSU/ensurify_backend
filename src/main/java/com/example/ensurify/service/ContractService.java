@@ -1,6 +1,6 @@
 package com.example.ensurify.service;
 
-import com.example.ensurify.domain.Clerk;
+import com.example.ensurify.domain.User;
 import com.example.ensurify.domain.Client;
 import com.example.ensurify.domain.Contract;
 import com.example.ensurify.domain.ContractDocument;
@@ -23,7 +23,7 @@ import java.util.List;
 public class ContractService {
 
     private final ContractRepository contractRepository;
-    private final ClerkService clerkService;
+    private final UserService userService;
     private final ClientService clientService;
     private final ContractDocumentService contractDocumentService;
 
@@ -33,13 +33,13 @@ public class ContractService {
     @Transactional
     public CreateContractResponse createContract(Long clerkId, CreateContractRequest request) {
 
-        Clerk clerk = clerkService.findById(clerkId);
+        User user = userService.findById(clerkId);
         Client client = clientService.findById(request.getClientId());
         ContractDocument document = contractDocumentService.findById(request.getContractDocumentId());
 
         Contract newContract = Contract.builder()
                 .contractDocument(document)
-                .clerk(clerk)
+                .user(user)
                 .client(client)
                 .build();
 
@@ -55,8 +55,8 @@ public class ContractService {
      */
     public GetContractListResponse.contractList getContractList(Long clerkId, Long docId) {
 
-        Clerk clerk = clerkService.findById(clerkId);
-        List<Contract> contracts = clerk.getContractList();
+        User user = userService.findById(clerkId);
+        List<Contract> contracts = user.getContractList();
 
         log.info("계약 목록 조회: contractsNum={}", contracts.size());
 

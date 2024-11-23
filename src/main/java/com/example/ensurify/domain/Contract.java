@@ -19,8 +19,8 @@ public class Contract extends BaseEntity {
     private ContractDocument contractDocument;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clerk_id")
-    private Clerk clerk;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")

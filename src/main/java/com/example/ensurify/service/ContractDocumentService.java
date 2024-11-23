@@ -2,7 +2,6 @@ package com.example.ensurify.service;
 
 import com.example.ensurify.common.apiPayload.code.status.ErrorStatus;
 import com.example.ensurify.common.apiPayload.exception.GeneralException;
-import com.example.ensurify.domain.Clerk;
 import com.example.ensurify.domain.ContractDocument;
 import com.example.ensurify.domain.ContractKeyword;
 import com.example.ensurify.dto.response.GetContractDocumentInfoResponse;
@@ -59,7 +58,6 @@ public class ContractDocumentService {
         return GetContractDocumentInfoResponse.builder()
                 .name(contractDocument.getName())
                 .category(contractDocument.getCategory())
-                .pdfUrl(contractDocument.getPdfUrl())
                 .keywords(keywords)
                 .build();
     }

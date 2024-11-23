@@ -1,6 +1,6 @@
 package com.example.ensurify.common.jwt;
 
-import com.example.ensurify.domain.Clerk;
+import com.example.ensurify.domain.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,7 @@ public class TokenProvider {
         return Keys.hmacShaKeyFor(secretKeyString.getBytes());
     }
 
-    public String generateToken(Clerk user, Duration expiredAt) {
+    public String generateToken(User user, Duration expiredAt) {
         Date now = new Date();
         return makeToken(new Date(now.getTime() + expiredAt.toMillis()), user);
     }
@@ -41,7 +41,7 @@ public class TokenProvider {
      * @param user   회원 정보
      * @return 생성된 토큰
      */
-    private String makeToken(Date expiry, Clerk user) {
+    private String makeToken(Date expiry, User user) {
         Date now = new Date();
 
         return Jwts.builder()
