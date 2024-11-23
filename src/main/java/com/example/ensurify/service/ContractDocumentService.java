@@ -21,16 +21,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ContractDocumentService {
 
-    private final ClerkService clerkService;
     private final ContractDocumentRepository contractDocumentRepository;
 
     /**
      * 계약서 목록 조회
      */
-    public GetContractDocumentListResponse.contractDocumentList getContractDocumentList(Long clerkId) {
+    public GetContractDocumentListResponse.contractDocumentList getContractDocumentList() {
 
-        Clerk clerk = clerkService.findById(clerkId);
-        List<ContractDocument> contractDocuments = clerk.getBank().getContractDocumentList();
+        List<ContractDocument> contractDocuments = contractDocumentRepository.findAll();
 
         log.info("계약서 목록 조회: contractsNum={}", contractDocuments.size());
 
@@ -51,14 +49,9 @@ public class ContractDocumentService {
     /**
      * 계약서 상세 조회
      */
-    public GetContractDocumentInfoResponse getContractDocumentInfo(Long clerkId, Long contractDocumentId) {
-
-        Clerk clerk = clerkService.findById(clerkId);
+    public GetContractDocumentInfoResponse getContractDocumentInfo(Long contractDocumentId) {
 
         ContractDocument contractDocument = findById(contractDocumentId);
-
-        if(clerk.getBank() != contractDocument.getBank())
-            throw new GeneralException(ErrorStatus.CONTRACT_DOCUMENT_NOT_REGISTERED);
 
         List<String> keywords = contractDocument.getKeywordList().stream()
                 .map(ContractKeyword::getKeyword).toList();

@@ -17,10 +17,6 @@ public class Clerk extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bank_id")
-    private Bank bank;
-
     @OneToMany(mappedBy = "clerk", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Contract> contractList = new ArrayList<>();

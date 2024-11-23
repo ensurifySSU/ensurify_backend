@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 @RestController
 @RequestMapping("/contract-docs")
 @RequiredArgsConstructor
@@ -25,22 +23,18 @@ public class ContractDocumentController {
 
     @GetMapping
     @Operation(summary = "계약서 목록 조회", description = "계약서 목록을 조회합니다.")
-    public BasicResponse<GetContractDocumentListResponse.contractDocumentList> getContractDocumentList(Principal principal){
+    public BasicResponse<GetContractDocumentListResponse.contractDocumentList> getContractDocumentList(){
 
-        Long clerkId = Long.parseLong(principal.getName());
-
-        GetContractDocumentListResponse.contractDocumentList contractList = contractDocumentService.getContractDocumentList(clerkId);
+        GetContractDocumentListResponse.contractDocumentList contractList = contractDocumentService.getContractDocumentList();
 
         return BasicResponse.onSuccess(contractList);
     }
 
     @GetMapping("/{contractDocumentId}")
     @Operation(summary = "계약서 상세 조회", description = "계약서를 상세 조회합니다.")
-    public BasicResponse<GetContractDocumentInfoResponse> getContractDocumentInfo(Principal principal, @PathVariable Long contractDocumentId){
+    public BasicResponse<GetContractDocumentInfoResponse> getContractDocumentInfo(@PathVariable Long contractDocumentId){
 
-        Long clerkId = Long.parseLong(principal.getName());
-
-        GetContractDocumentInfoResponse contractDocumentInfo = contractDocumentService.getContractDocumentInfo(clerkId, contractDocumentId);
+        GetContractDocumentInfoResponse contractDocumentInfo = contractDocumentService.getContractDocumentInfo(contractDocumentId);
 
         log.info("계약서 상세 조회: contractDocId={}", contractDocumentId);
 

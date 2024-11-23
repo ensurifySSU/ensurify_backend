@@ -61,7 +61,6 @@ public class ClerkService {
 
         return GetClerkInfoResponse.builder()
                 .name(clerk.getName())
-                .bank(clerk.getBank().getName())
                 .imageUrl(clerk.getImageUrl())
                 .build();
     }

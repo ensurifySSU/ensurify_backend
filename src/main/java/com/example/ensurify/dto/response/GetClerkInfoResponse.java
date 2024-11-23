@@ -14,8 +14,6 @@ public class GetClerkInfoResponse {
 
     @Schema(description = "행원명", nullable = false, example = "짱구")
     private String name;
-    @Schema(description = "은행명", nullable = false, example = "숭실은행")
-    private String bank;
     @Schema(description = "이미지 URL", nullable = false, example = "...")
     private String imageUrl;
 }

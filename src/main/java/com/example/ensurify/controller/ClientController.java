@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
 @RestController
 @RequestMapping("/clients")
 @RequiredArgsConstructor
@@ -25,11 +23,9 @@ public class ClientController {
 
     @GetMapping("/{clientId}")
     @Operation(summary = "고객 정보 조회", description = "고객 정보를 조회합니다.")
-    public BasicResponse<GetClientInfoResponse> getClientInfo(Principal principal, @PathVariable Long clientId){
+    public BasicResponse<GetClientInfoResponse> getClientInfo(@PathVariable Long clientId){
 
-        Long clerkId = Long.parseLong(principal.getName());
-
-        GetClientInfoResponse clientInfo = clientService.getClientInfo(clerkId, clientId);
+        GetClientInfoResponse clientInfo = clientService.getClientInfo(clientId);
 
         log.info("고객 정보 조회: clientId={}", clientId);
 
@@ -38,13 +34,9 @@ public class ClientController {
 
     @GetMapping
     @Operation(summary = "고객 목록 조회", description = "고객 목록을 조회합니다.")
-    public BasicResponse<GetClientListResponse.clientList> getClientList(Principal principal){
+    public BasicResponse<GetClientListResponse.clientList> getClientList(){
 
-        Long clerkId = Long.parseLong(principal.getName());
-
-        log.info("행원 정보 조회: clerkId={}", clerkId);
-
-        GetClientListResponse.clientList clientList = clientService.getClientList(clerkId);
+        GetClientListResponse.clientList clientList = clientService.getClientList();
 
         return BasicResponse.onSuccess(clientList);
     }
