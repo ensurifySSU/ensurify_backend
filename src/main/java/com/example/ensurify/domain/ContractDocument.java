@@ -20,7 +20,11 @@ public class ContractDocument extends BaseEntity {
 
     private String name;
 
-    private String pdfUrl;
+    private int checkTotal;
+
+    private int signTotal;
+
+    private int pageNum;
 
     @Enumerated(EnumType.STRING)
     private ContractCategory category;
