@@ -1,10 +1,14 @@
 package com.example.ensurify.domain.stomp;
 
+import com.example.ensurify.domain.ContractHistory;
 import com.example.ensurify.domain.User;
 import com.example.ensurify.domain.ContractDocument;
 import com.example.ensurify.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -22,8 +26,4 @@ public class MeetingRoom extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contract_document_id")
     private ContractDocument contractDocument;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
 }

@@ -10,7 +10,7 @@ import lombok.*;
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Page extends BaseEntity {
+public class MovePage extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
