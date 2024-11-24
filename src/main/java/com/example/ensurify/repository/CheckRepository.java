@@ -4,5 +4,7 @@ import com.example.ensurify.domain.stomp.actions.Check;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CheckRepository extends JpaRepository<Check, Long> {
+
+    boolean existsByCheckNumAndMeetingRoomId(int checkNum, Long meetingRoomId);
 }
 

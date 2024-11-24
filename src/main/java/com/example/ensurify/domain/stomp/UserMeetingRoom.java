@@ -9,7 +9,7 @@ import lombok.*;
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserMeetingRoom { // N:N 매핑 테이블
+public class UserMeetingRoom {  // N:N 매핑 테이블
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
