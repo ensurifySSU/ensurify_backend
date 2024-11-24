@@ -20,6 +20,6 @@ public class Check extends BaseEntity {
     private int checkNum;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "room_id")
-    private MeetingRoom room;
+    @JoinColumn(name = "meeting_room_id")
+    private MeetingRoom meetingRoom;
 }

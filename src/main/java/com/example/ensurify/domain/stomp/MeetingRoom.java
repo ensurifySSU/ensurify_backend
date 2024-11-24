@@ -21,8 +21,6 @@ public class MeetingRoom extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "contract_document_id")
     private ContractDocument contractDocument;

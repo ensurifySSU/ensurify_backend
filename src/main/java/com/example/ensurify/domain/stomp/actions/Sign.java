@@ -21,6 +21,6 @@ public class Sign extends BaseEntity {
     private String signImg;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "room_id")
-    private MeetingRoom room;
+    @JoinColumn(name = "meeting_room_id")
+    private MeetingRoom meetingRoom;
 }

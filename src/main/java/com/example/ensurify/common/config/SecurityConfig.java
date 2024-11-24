@@ -53,6 +53,8 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers("/clerks/login", "/contract-docs/**", "/clients/**", "/health")
                         .permitAll()
+                        .requestMatchers("/ws-stomp")
+                        .permitAll()
                         .anyRequest().authenticated())
 
                 // 헤더를 확인할 커스텀 필터 추가

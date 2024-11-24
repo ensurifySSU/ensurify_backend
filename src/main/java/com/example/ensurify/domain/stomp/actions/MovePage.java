@@ -19,6 +19,6 @@ public class MovePage extends BaseEntity {
     private int pageNum;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "room_id")
-    private MeetingRoom room;
+    @JoinColumn(name = "meeting_room_id")
+    private MeetingRoom meetingRoom;
 }
