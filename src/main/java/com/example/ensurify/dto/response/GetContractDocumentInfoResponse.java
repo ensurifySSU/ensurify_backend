@@ -19,8 +19,6 @@ public class GetContractDocumentInfoResponse {
     private String name;
     @Schema(description = "계약 카테고리", nullable = false, example = "IRP")
     private ContractCategory category;
-    @Schema(description = "PDF URL", nullable = false, example = "...")
-    private String pdfUrl;
     @Schema(description = "키워드 목록", example = "[\"재무\", \"계약\", \"IRP\"]")
     private List<String> keywords;
 }

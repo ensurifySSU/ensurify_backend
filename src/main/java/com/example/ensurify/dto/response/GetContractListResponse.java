@@ -36,5 +36,7 @@ public class GetContractListResponse {
         private String client;
         @Schema(description = "청약일자", nullable = false, example = "2024.11.08")
         private String date;
+        @Schema(description = "계약 내역 pdf", nullable = false, example = "...")
+        private String pdfUrl;
     }
 }
