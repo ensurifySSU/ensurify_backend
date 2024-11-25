@@ -4,10 +4,7 @@ import com.example.ensurify.common.apiPayload.code.status.ErrorStatus;
 import com.example.ensurify.common.apiPayload.exception.GeneralException;
 import com.example.ensurify.domain.User;
 import com.example.ensurify.domain.stomp.MeetingRoom;
-import com.example.ensurify.domain.stomp.UserMeetingRoom;
-import com.example.ensurify.domain.stomp.actions.Check;
 import com.example.ensurify.dto.request.CheckRequest;
-import com.example.ensurify.repository.CheckRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,17 +14,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class CheckService {
+public class WebSocketService {
 
-    private final CheckRepository checkRepository;
     private final MeetingRoomService meetingRoomService;
     private final UserService userService;
 
     /**
-     * 체크 내역 저장
+     * 체크 내역 검증
      */
     @Transactional
-    public void save(CheckRequest request, Long userId) {
+    public void validCheck(CheckRequest request, Long userId) {
 
         User user = userService.findById(userId);
 
@@ -44,16 +40,5 @@ public class CheckService {
         // 3. 체크박스 숫자 유효성 검사
         if(meetingRoom.getContractDocument().getCheckTotal() < request.getCheckNum())
             throw new GeneralException(ErrorStatus.CHECK_NUM_NOT_FOUND);
-
-        // 4. 체크 내역 저장(이미 존재할 경우 저장 X)
-        if(!checkRepository.existsByCheckNumAndMeetingRoomId(request.getCheckNum(), meetingRoom.getId())) {
-
-            Check check = Check.builder()
-                    .checkNum(request.getCheckNum())
-                    .meetingRoom(meetingRoom)
-                    .build();
-
-            checkRepository.save(check);
-        }
     }
 }
