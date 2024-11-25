@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class SignRequest {
+    private Long meetingRoomId;
     private int signNum;
-    private String signImg;
+    private String imgUrl;
 }

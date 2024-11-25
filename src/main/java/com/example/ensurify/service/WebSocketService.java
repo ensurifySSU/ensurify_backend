@@ -6,6 +6,7 @@ import com.example.ensurify.domain.User;
 import com.example.ensurify.domain.MeetingRoom;
 import com.example.ensurify.dto.request.CheckRequest;
 import com.example.ensurify.dto.request.MovePageRequest;
+import com.example.ensurify.dto.request.SignRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,19 @@ public class WebSocketService {
         if(meetingRoom.getContractDocument().getCheckTotal() < request.getCheckNum())
             throw new GeneralException(ErrorStatus.CHECK_NUM_NOT_FOUND);
     }
+
+    /**
+     * 서명란 검증
+     */
+    @Transactional
+    public void validSign(SignRequest request) {
+
+        MeetingRoom meetingRoom = meetingRoomService.findById(request.getMeetingRoomId());
+
+        if(meetingRoom.getContractDocument().getSignTotal() < request.getSignNum())
+            throw new GeneralException(ErrorStatus.SIGN_NUM_NOT_FOUND);
+    }
+
 
     /**
      * 페이지 이동 검증
