@@ -28,6 +28,7 @@ public enum ErrorStatus implements BaseErrorCode {
     MEETING_ROOM_NOT_FOUND(HttpStatus.NOT_FOUND, "CONTRACT401", "존재하지 않는 회의실 정보입니다."),
     CHECK_NUM_NOT_FOUND(HttpStatus.NOT_FOUND, "CONTRACT402", "계약서 내에 존재하지 않는 체크 번호입니다."),
     USER_NOT_IN_ROOM(HttpStatus.FORBIDDEN, "CONTRACT403", "해당 ROOM에 입장할 수 없는 유저입니다."),
+    PAGE_NOT_FOUND(HttpStatus.NOT_FOUND, "CONTRACT404", "계약서 내에 존재하지 않는 페이지 번호입니다."),
 
     // JWT
     TOKEN_INVALID(HttpStatus.UNAUTHORIZED, "JWT400", "유효하지 않은 토큰입니다."),

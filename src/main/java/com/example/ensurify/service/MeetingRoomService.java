@@ -2,8 +2,7 @@ package com.example.ensurify.service;
 
 import com.example.ensurify.common.apiPayload.code.status.ErrorStatus;
 import com.example.ensurify.common.apiPayload.exception.GeneralException;
-import com.example.ensurify.domain.Client;
-import com.example.ensurify.domain.stomp.MeetingRoom;
+import com.example.ensurify.domain.MeetingRoom;
 import com.example.ensurify.repository.MeetingRoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

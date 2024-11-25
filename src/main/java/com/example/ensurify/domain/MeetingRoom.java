@@ -1,9 +1,5 @@
-package com.example.ensurify.domain.stomp;
+package com.example.ensurify.domain;
 
-import com.example.ensurify.domain.ContractHistory;
-import com.example.ensurify.domain.ContractKeyword;
-import com.example.ensurify.domain.User;
-import com.example.ensurify.domain.ContractDocument;
 import com.example.ensurify.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;

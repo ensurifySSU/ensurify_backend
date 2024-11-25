@@ -1,5 +1,6 @@
-package com.example.ensurify.domain.stomp;
+package com.example.ensurify.domain;
 
+import com.example.ensurify.domain.MeetingRoom;
 import com.example.ensurify.domain.User;
 import jakarta.persistence.*;
 import lombok.*;

@@ -24,7 +24,7 @@ public class ContractDocument extends BaseEntity {
 
     private int signTotal;
 
-    private int pageNum;
+    private int pageTotal;
 
     @Enumerated(EnumType.STRING)
     private ContractCategory category;
