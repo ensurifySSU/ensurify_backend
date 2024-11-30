@@ -25,7 +25,7 @@ public class WebSocketService {
      * 회의실 검증
      */
     @Transactional
-    public void validMeetingRoom(Long meetingRoomId, Long userId) {
+    public void validRoom(Long meetingRoomId, Long userId) {
 
         User user = userService.findById(userId);
 

@@ -34,12 +34,12 @@ public class WebSocketController {
         Authentication authentication = tokenProvider.getAuthentication(accessToken);
         Long userId = Long.parseLong(authentication.getName());
 
-        webSocketService.validMeetingRoom(request.getMeetingRoomId(), userId);
+        webSocketService.validRoom(request.getRoomId(), userId);
         webSocketService.validCheck(request);
 
         // 메시지를 해당 회의실 구독자들에게 전송
-        messagingTemplate.convertAndSend("/sub/meetingroom/" + request.getMeetingRoomId(), request);
-        log.info("meetingRoom={}, checkNum={}, checked={}", request.getMeetingRoomId(), request.getCheckNum(), request.isChecked());
+        messagingTemplate.convertAndSend("/sub/rooms/" + request.getRoomId(), request);
+        log.info("room={}, checkNum={}, checked={}", request.getRoomId(), request.getCheckNum(), request.isChecked());
     }
 
 
@@ -51,12 +51,12 @@ public class WebSocketController {
         Authentication authentication = tokenProvider.getAuthentication(accessToken);
         Long userId = Long.parseLong(authentication.getName());
 
-        webSocketService.validMeetingRoom(request.getMeetingRoomId(), userId);
+        webSocketService.validRoom(request.getRoomId(), userId);
         webSocketService.validSign(request);
 
         // 메시지를 해당 회의실 구독자들에게 전송
-        messagingTemplate.convertAndSend("/sub/meetingroom/" + request.getMeetingRoomId(), request);
-        log.info("meetingRoom={}, signNum={}, imgUrl={}", request.getMeetingRoomId(), request.getSignNum(), request.getImgUrl());
+        messagingTemplate.convertAndSend("/sub/rooms/" + request.getRoomId(), request);
+        log.info("room={}, signNum={}, imgUrl={}", request.getRoomId(), request.getSignNum(), request.getImgUrl());
     }
 
     // 페이지 번호 송수신(이동용)
@@ -67,11 +67,11 @@ public class WebSocketController {
         Authentication authentication = tokenProvider.getAuthentication(accessToken);
         Long userId = Long.parseLong(authentication.getName());
 
-        webSocketService.validMeetingRoom(request.getMeetingRoomId(), userId);
+        webSocketService.validRoom(request.getRoomId(), userId);
         webSocketService.validPage(request);
 
         // 메시지를 해당 회의실 구독자들에게 전송
-        messagingTemplate.convertAndSend("/sub/meetingroom/" + request.getMeetingRoomId(), request);
-        log.info("meetingRoom={}, pageNum={}", request.getMeetingRoomId(), request.getPageNum());
+        messagingTemplate.convertAndSend("/sub/rooms/" + request.getRoomId(), request);
+        log.info("room={}, pageNum={}", request.getRoomId(), request.getPageNum());
     }
 }
