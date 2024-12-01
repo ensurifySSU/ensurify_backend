@@ -33,7 +33,10 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // JWT
     TOKEN_INVALID(HttpStatus.UNAUTHORIZED, "JWT400", "유효하지 않은 토큰입니다."),
-    TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "JWT401", "만료된 토큰입니다.");
+    TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "JWT401", "만료된 토큰입니다."),
+
+    // S3
+    FILE_NOT_FOUND(HttpStatus.NOT_FOUND, "S3400", "존재하지 않는 파일 정보입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
