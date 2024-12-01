@@ -30,8 +30,8 @@ public class MeetingRoomService {
 
         User user = userService.findById(clerkId);
 
-        if(user.getRole() == Role.GUEST)
-            throw new GeneralException(ErrorStatus.GUEST_CANNOT_CREATE_ROOM);
+        if(user.getRole() != Role.USER)
+            throw new GeneralException(ErrorStatus.USER_ACCESS_ONLY);
 
         ContractDocument document = contractDocumentService.findById(contractDocumentId);
 
@@ -49,6 +49,25 @@ public class MeetingRoomService {
         userMeetingRoomRepository.save(userMeetingRoom);
 
         return room.getId();
+    }
+
+    // 회의실 입장
+    @Transactional
+    public void participateRoom(Long clientId, Long roomId) {
+
+        User user = userService.findById(clientId);
+
+        if(user.getRole() != Role.GUEST)
+            throw new GeneralException(ErrorStatus.GUEST_ACCESS_ONLY);
+
+        MeetingRoom room = findById(roomId);
+
+        UserMeetingRoom userMeetingRoom = UserMeetingRoom.builder()
+                .user(user)
+                .meetingRoom(room)
+                .build();
+
+        userMeetingRoomRepository.save(userMeetingRoom);
     }
 
     // id로 meeting room 검색

@@ -19,6 +19,8 @@ public enum ErrorStatus implements BaseErrorCode {
     // User
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER400", "존재하지 않는 유저 정보입니다."),
     INVALID_PASSWORD(HttpStatus.CONFLICT, "USER401", "적절하지 않은 패스워드입니다."),
+    USER_ACCESS_ONLY(HttpStatus.FORBIDDEN, "USER402", "USER(행원)만 사용 가능합니다."),
+    GUEST_ACCESS_ONLY(HttpStatus.FORBIDDEN, "USER403", "GUEST(고객)만 사용 가능합니다"),
 
     // Client
     CLIENT_NOT_FOUND(HttpStatus.NOT_FOUND, "CLIENT400", "존재하지 않는 고객 정보입니다."),
@@ -37,10 +39,7 @@ public enum ErrorStatus implements BaseErrorCode {
     TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "JWT401", "만료된 토큰입니다."),
 
     // S3
-    FILE_NOT_FOUND(HttpStatus.NOT_FOUND, "S3400", "존재하지 않는 파일 정보입니다."),
-
-    // Room
-    GUEST_CANNOT_CREATE_ROOM(HttpStatus.FORBIDDEN, "ROOM400", "Guest(고객)은 회의실을 생성할 수 없습니다.");
+    FILE_NOT_FOUND(HttpStatus.NOT_FOUND, "S3400", "존재하지 않는 파일 정보입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
