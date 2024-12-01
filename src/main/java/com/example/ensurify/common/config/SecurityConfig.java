@@ -53,7 +53,7 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers("/users/login", "/contracts/docs/**", "/clients/**", "/health")
                         .permitAll()
-                        .requestMatchers("/ws-stomp")
+                        .requestMatchers("/ws-stomp", "/signal")
                         .permitAll()
                         .anyRequest().authenticated())
 

@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class CheckRequest {
 
-    private Long meetingRoomId;
+    private Long roomId;
     private int checkNum;
     private boolean checked;
 }

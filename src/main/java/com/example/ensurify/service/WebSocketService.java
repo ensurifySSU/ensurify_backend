@@ -25,7 +25,7 @@ public class WebSocketService {
      * 회의실 검증
      */
     @Transactional
-    public void validMeetingRoom(Long meetingRoomId, Long userId) {
+    public void validRoom(Long meetingRoomId, Long userId) {
 
         User user = userService.findById(userId);
 
@@ -46,7 +46,7 @@ public class WebSocketService {
     @Transactional
     public void validCheck(CheckRequest request) {
 
-        MeetingRoom meetingRoom = meetingRoomService.findById(request.getMeetingRoomId());
+        MeetingRoom meetingRoom = meetingRoomService.findById(request.getRoomId());
 
         if(meetingRoom.getContractDocument().getCheckTotal() < request.getCheckNum())
             throw new GeneralException(ErrorStatus.CHECK_NUM_NOT_FOUND);
@@ -58,7 +58,7 @@ public class WebSocketService {
     @Transactional
     public void validSign(SignRequest request) {
 
-        MeetingRoom meetingRoom = meetingRoomService.findById(request.getMeetingRoomId());
+        MeetingRoom meetingRoom = meetingRoomService.findById(request.getRoomId());
 
         if(meetingRoom.getContractDocument().getSignTotal() < request.getSignNum())
             throw new GeneralException(ErrorStatus.SIGN_NUM_NOT_FOUND);
@@ -71,7 +71,7 @@ public class WebSocketService {
     @Transactional
     public void validPage(MovePageRequest request) {
 
-        MeetingRoom meetingRoom = meetingRoomService.findById(request.getMeetingRoomId());
+        MeetingRoom meetingRoom = meetingRoomService.findById(request.getRoomId());
 
         if(meetingRoom.getContractDocument().getPageTotal() < request.getPageNum())
             throw new GeneralException(ErrorStatus.CHECK_NUM_NOT_FOUND);
