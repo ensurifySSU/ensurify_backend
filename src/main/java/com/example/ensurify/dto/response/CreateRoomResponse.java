@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateContractResponse {
-
-    @Schema(description = "계약 id", nullable = false, example = "1")
-    private Long contractId;
+public class CreateRoomResponse {
 
     @Schema(description = "회의실 id", nullable = false, example = "1")
     private Long roomId;

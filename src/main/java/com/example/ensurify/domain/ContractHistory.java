@@ -27,4 +27,8 @@ public class ContractHistory extends BaseEntity {
     private Client client;
 
     private String pdfUrl;
+
+    public void setPdfUrl(String url){
+        this.pdfUrl = url;
+    }
 }

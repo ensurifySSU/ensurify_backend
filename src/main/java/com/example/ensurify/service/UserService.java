@@ -3,12 +3,15 @@ package com.example.ensurify.service;
 import com.example.ensurify.common.apiPayload.exception.GeneralException;
 import com.example.ensurify.common.jwt.TokenProvider;
 import com.example.ensurify.domain.User;
+import com.example.ensurify.domain.enums.Role;
 import com.example.ensurify.dto.request.LoginRequest;
+import com.example.ensurify.dto.response.CreateGuestAccountResponse;
 import com.example.ensurify.dto.response.GetUserInfoResponse;
 import com.example.ensurify.dto.response.LoginResponse;
 import com.example.ensurify.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +51,30 @@ public class UserService {
 
         return LoginResponse.builder()
                 .accessToken(accessToken)
+                .build();
+    }
+
+    /**
+     * Guest 계정 생성
+     */
+    @Transactional
+    public CreateGuestAccountResponse createGuestAccount() {
+
+        // username과 password 무작위 생성
+        String username = RandomStringUtils.randomAlphanumeric(8); // 8자리 알파벳+숫자 조합
+        String password = RandomStringUtils.randomAlphanumeric(8);
+
+        User user = User.builder()
+                .username(username)
+                .password(password)
+                .role(Role.GUEST)
+                .build();
+
+        userRepository.save(user);
+
+        return CreateGuestAccountResponse.builder()
+                .username(username)
+                .password(password)
                 .build();
     }
 

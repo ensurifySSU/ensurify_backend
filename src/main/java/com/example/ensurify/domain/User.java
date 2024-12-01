@@ -1,6 +1,7 @@
 package com.example.ensurify.domain;
 
 import com.example.ensurify.domain.common.BaseEntity;
+import com.example.ensurify.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,5 +30,8 @@ public class User extends BaseEntity {
     private String username;
 
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
 

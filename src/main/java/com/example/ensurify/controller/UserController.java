@@ -2,6 +2,7 @@ package com.example.ensurify.controller;
 
 import com.example.ensurify.common.apiPayload.BasicResponse;
 import com.example.ensurify.dto.request.LoginRequest;
+import com.example.ensurify.dto.response.CreateGuestAccountResponse;
 import com.example.ensurify.dto.response.GetUserInfoResponse;
 import com.example.ensurify.dto.response.LoginResponse;
 import com.example.ensurify.service.UserService;
@@ -30,6 +31,15 @@ public class UserController {
     public BasicResponse<LoginResponse> login(@RequestBody @Valid LoginRequest request) {
 
         LoginResponse response = userService.login(request);
+
+        return BasicResponse.onSuccess(response);
+    }
+
+    @PostMapping("/guests/signup")
+    @Operation(summary = "Guest 계정 생성", description = "Guest 계정(Client용)을 생성합니다.")
+    public BasicResponse<CreateGuestAccountResponse> createGuestAccount() {
+
+        CreateGuestAccountResponse response = userService.createGuestAccount();
 
         return BasicResponse.onSuccess(response);
     }
