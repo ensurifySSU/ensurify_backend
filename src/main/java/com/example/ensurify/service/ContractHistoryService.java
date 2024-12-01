@@ -34,7 +34,7 @@ public class ContractHistoryService {
      * 계약 생성
      */
     @Transactional
-    public CreateContractResponse createContract(Long clerkId, CreateContractRequest request) {
+    public CreateContractResponse createContract(Long clerkId, CreateContractRequest request, Long roomId) {
 
         User user = userService.findById(clerkId);
         Client client = clientService.findById(request.getClientId());
@@ -50,6 +50,7 @@ public class ContractHistoryService {
 
         return CreateContractResponse.builder()
                 .contractId(newContractHistory.getId())
+                .roomId(roomId)
                 .build();
     }
 

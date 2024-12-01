@@ -37,7 +37,10 @@ public enum ErrorStatus implements BaseErrorCode {
     TOKEN_EXPIRED(HttpStatus.UNAUTHORIZED, "JWT401", "만료된 토큰입니다."),
 
     // S3
-    FILE_NOT_FOUND(HttpStatus.NOT_FOUND, "S3400", "존재하지 않는 파일 정보입니다.");
+    FILE_NOT_FOUND(HttpStatus.NOT_FOUND, "S3400", "존재하지 않는 파일 정보입니다."),
+
+    // Room
+    GUEST_CANNOT_CREATE_ROOM(HttpStatus.FORBIDDEN, "ROOM400", "Guest(고객)은 회의실을 생성할 수 없습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;

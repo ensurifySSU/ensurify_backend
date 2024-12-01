@@ -5,6 +5,7 @@ import com.example.ensurify.dto.request.CreateContractRequest;
 import com.example.ensurify.dto.response.*;
 import com.example.ensurify.service.ContractDocumentService;
 import com.example.ensurify.service.ContractHistoryService;
+import com.example.ensurify.service.MeetingRoomService;
 import com.example.ensurify.service.S3Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,6 +29,7 @@ public class ContractController {
 
     private final ContractHistoryService contractHistoryService;
     private final ContractDocumentService contractDocumentService;
+    private final MeetingRoomService meetingRoomService;
     private final S3Service s3Service;
 
     @PostMapping
@@ -37,7 +39,9 @@ public class ContractController {
 
         Long userId = Long.parseLong(principal.getName());
 
-        CreateContractResponse response = contractHistoryService.createContract(userId, request);
+        Long roomId = meetingRoomService.createRoom(userId, request.getContractDocumentId());
+
+        CreateContractResponse response = contractHistoryService.createContract(userId, request, roomId);
 
         return BasicResponse.onSuccess(response);
     }

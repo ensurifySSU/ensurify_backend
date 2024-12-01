@@ -2,8 +2,12 @@ package com.example.ensurify.service;
 
 import com.example.ensurify.common.apiPayload.code.status.ErrorStatus;
 import com.example.ensurify.common.apiPayload.exception.GeneralException;
-import com.example.ensurify.domain.MeetingRoom;
+import com.example.ensurify.domain.*;
+import com.example.ensurify.domain.enums.Role;
+import com.example.ensurify.dto.request.CreateContractRequest;
+import com.example.ensurify.dto.response.CreateContractResponse;
 import com.example.ensurify.repository.MeetingRoomRepository;
+import com.example.ensurify.repository.UserMeetingRoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,36 @@ import org.springframework.transaction.annotation.Transactional;
 public class MeetingRoomService {
 
     private final MeetingRoomRepository meetingRoomRepository;
+    private final UserMeetingRoomRepository userMeetingRoomRepository;
+    private final UserService userService;
+    private final ContractDocumentService contractDocumentService;
+
+    // 회의실 생성
+    @Transactional
+    public Long createRoom(Long clerkId, Long contractDocumentId) {
+
+        User user = userService.findById(clerkId);
+
+        if(user.getRole() == Role.GUEST)
+            throw new GeneralException(ErrorStatus.GUEST_CANNOT_CREATE_ROOM);
+
+        ContractDocument document = contractDocumentService.findById(contractDocumentId);
+
+        MeetingRoom room = MeetingRoom.builder()
+                .contractDocument(document)
+                .build();
+
+        meetingRoomRepository.save(room);
+
+        UserMeetingRoom userMeetingRoom = UserMeetingRoom.builder()
+                .user(user)
+                .meetingRoom(room)
+                .build();
+
+        userMeetingRoomRepository.save(userMeetingRoom);
+
+        return room.getId();
+    }
 
     // id로 meeting room 검색
     public MeetingRoom findById(Long roomId) {
