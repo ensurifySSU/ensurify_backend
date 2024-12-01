@@ -92,14 +92,17 @@ public class ContractHistoryService {
     @Transactional
     public PostContractPdfResponse postContractPdf(Long contractId, String pdfUrl) {
 
-        ContractHistory contractHistory = contractHistoryRepository.findById(contractId)
-                .orElseThrow(() -> new GeneralException(ErrorStatus.CONTRACT_HISTORY_NOT_FOUND));
-
+        ContractHistory contractHistory = findById(contractId);
 
         contractHistory.setPdfUrl(pdfUrl);
 
         return PostContractPdfResponse.builder()
                 .pdfUrl(pdfUrl)
                 .build();
+    }
+
+    private ContractHistory findById(Long contractId) {
+        return contractHistoryRepository.findById(contractId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.CONTRACT_HISTORY_NOT_FOUND));
     }
 }
