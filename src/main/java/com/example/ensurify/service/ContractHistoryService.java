@@ -1,5 +1,7 @@
 package com.example.ensurify.service;
 
+import com.example.ensurify.common.apiPayload.code.status.ErrorStatus;
+import com.example.ensurify.common.apiPayload.exception.GeneralException;
 import com.example.ensurify.domain.User;
 import com.example.ensurify.domain.Client;
 import com.example.ensurify.domain.ContractHistory;
@@ -7,6 +9,7 @@ import com.example.ensurify.domain.ContractDocument;
 import com.example.ensurify.dto.request.CreateContractRequest;
 import com.example.ensurify.dto.response.CreateContractResponse;
 import com.example.ensurify.dto.response.GetContractListResponse;
+import com.example.ensurify.dto.response.PostContractPdfResponse;
 import com.example.ensurify.repository.ContractHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +54,7 @@ public class ContractHistoryService {
     }
 
     /**
-     * 계약 목록 조회
+     * 계약 내역 목록 조회
      */
     public GetContractListResponse.contractList getContractList(Long clerkId, Long docId) {
 
@@ -80,6 +83,23 @@ public class ContractHistoryService {
 
         return GetContractListResponse.contractList.builder()
                 .contractList(contractInfos)
+                .build();
+    }
+
+    /**
+     * 계약 내역 PDF 저장
+     */
+    @Transactional
+    public PostContractPdfResponse postContractPdf(Long contractId, String pdfUrl) {
+
+        ContractHistory contractHistory = contractHistoryRepository.findById(contractId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.CONTRACT_HISTORY_NOT_FOUND));
+
+
+        contractHistory.setPdfUrl(pdfUrl);
+
+        return PostContractPdfResponse.builder()
+                .pdfUrl(pdfUrl)
                 .build();
     }
 }
