@@ -4,7 +4,6 @@ import com.example.ensurify.dto.response.StompResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -26,8 +25,6 @@ public class SignalHandler extends TextWebSocketHandler {
     // 웹소켓이 연결되면 실행되는 메소드
     @Override
     public void afterConnectionEstablished(final WebSocketSession session) {
-        log.info("connection established, session id={}", session.getId());
-
         // 세션 ID 생성 후, 클라이언트에 전송
         String sessionId = session.getId();
 
@@ -38,7 +35,7 @@ public class SignalHandler extends TextWebSocketHandler {
         try {
             String jsonResponse = objectMapper.writeValueAsString(response);
             session.sendMessage(new TextMessage(jsonResponse));
-            log.info("Session connected: {}", session.getId());
+            log.info("connection established, session id={}", session.getId());
 
         } catch (IOException e) {
             log.error("Error sending session ID: {}", e.getMessage());
@@ -51,7 +48,6 @@ public class SignalHandler extends TextWebSocketHandler {
         try {
             WebSocketMessage message = objectMapper.readValue(textMessage.getPayload(), WebSocketMessage.class);
             String userName = message.getSender();
-            String data = message.getData();
             Long roomId = message.getRoomId();
 
             log.info("======================================== origin message INFO");
