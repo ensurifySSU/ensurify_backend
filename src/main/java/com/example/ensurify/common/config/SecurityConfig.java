@@ -43,6 +43,11 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable) //Form 로그인 방식 disable
                 .httpBasic(AbstractHttpConfigurer::disable) //HTTP Basic 인증 방식 disable
 
+                // CORS 정책 설정
+                .cors(cors -> cors
+                        .configurationSource(CorsConfig.corsConfigurationSource())
+                )
+
                 // 토큰 기반 인증을 사용하기 때문에 세션 기능 비활성화
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
