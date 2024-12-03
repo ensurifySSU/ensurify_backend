@@ -29,7 +29,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final TokenProvider tokenProvider;
 
-    private static final Duration ACCESS_TOKEN_DURATION = Duration.ofMinutes(30);
+    private static final Duration ACCESS_TOKEN_DURATION = Duration.ofHours(10);
 
     /**
      * 로그인
