@@ -16,14 +16,15 @@ public class CorsConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         //리소스를 허용할 URL 지정
-//        ArrayList<String> allowedOriginPatterns = new ArrayList<>();
-//        allowedOriginPatterns.add("http://localhost:3000");
-//        allowedOriginPatterns.add("http://localhost:8080");
-//        allowedOriginPatterns.add("https://ensurify.store");
-//        allowedOriginPatterns.add("ws://localhost:8080");
-//        allowedOriginPatterns.add("wss://ensurify.store");
-//        allowedOriginPatterns.add("https://jiangxy.github.io");
-        configuration.setAllowedOrigins(Collections.singletonList("*"));
+        ArrayList<String> allowedOriginPatterns = new ArrayList<>();
+        allowedOriginPatterns.add("http://localhost:3000");
+        allowedOriginPatterns.add("http://localhost:5173");
+        allowedOriginPatterns.add("http://localhost:8080");
+        allowedOriginPatterns.add("https://ensurify.store");
+        allowedOriginPatterns.add("ws://localhost:8080");
+        allowedOriginPatterns.add("wss://ensurify.store");
+        allowedOriginPatterns.add("https://jiangxy.github.io");
+        configuration.setAllowedOrigins(allowedOriginPatterns);
 
         //허용하는 HTTP METHOD 지정
         ArrayList<String> allowedHttpMethods = new ArrayList<>();
@@ -37,7 +38,7 @@ public class CorsConfig {
 //        configuration.setAllowedHeaders(List.of(HttpHeaders.AUTHORIZATION, HttpHeaders.CONTENT_TYPE));
 
         //인증, 인가를 위한 credentials 를 TRUE로 설정
-//        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
