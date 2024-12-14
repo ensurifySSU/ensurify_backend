@@ -1,4 +1,4 @@
-package com.example.ensurify.WebRTC;
+package com.example.ensurify.webRtc;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

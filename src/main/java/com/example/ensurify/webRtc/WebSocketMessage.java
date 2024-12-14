@@ -1,4 +1,4 @@
-package com.example.ensurify.WebRTC;
+package com.example.ensurify.webRtc;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Objects;
 
 // 기능 : 프론트에 응답하는 시그널링용 Message
 @Builder

@@ -1,4 +1,4 @@
-package com.example.ensurify.WebRTC;
+package com.example.ensurify.webRtc;
 
 import com.example.ensurify.dto.response.StompResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
