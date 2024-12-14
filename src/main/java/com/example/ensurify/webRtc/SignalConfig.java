@@ -1,4 +1,4 @@
-package com.example.ensurify.WebRTC;
+package com.example.ensurify.webRtc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

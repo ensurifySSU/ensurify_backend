@@ -1,12 +1,9 @@
 package com.example.ensurify.common.config;
 
-import com.example.ensurify.WebRTC.SignalHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
-import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.config.annotation.*;
 
 @Configuration
