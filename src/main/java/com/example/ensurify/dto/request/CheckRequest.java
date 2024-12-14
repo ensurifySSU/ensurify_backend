@@ -8,6 +8,6 @@ public class CheckRequest {
 
     private Long roomId;
     private int checkNum;
-    private boolean checked;
+    private String imgUrl;
 }
 

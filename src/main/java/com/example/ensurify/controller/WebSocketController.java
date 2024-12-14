@@ -39,9 +39,8 @@ public class WebSocketController {
 
         // 메시지를 해당 회의실 구독자들에게 전송
         messagingTemplate.convertAndSend("/sub/rooms/" + request.getRoomId(), request);
-        log.info("room={}, checkNum={}, checked={}", request.getRoomId(), request.getCheckNum(), request.isChecked());
+        log.info("room={}, checkNum={}, imgUrl={}", request.getRoomId(), request.getCheckNum(), request.getImgUrl());
     }
-
 
     // 서명 송수신
     @MessageMapping("/sign")
