@@ -2,6 +2,7 @@ package com.example.ensurify.service;
 
 import com.example.ensurify.common.apiPayload.exception.GeneralException;
 import com.example.ensurify.common.jwt.TokenProvider;
+import com.example.ensurify.domain.Client;
 import com.example.ensurify.domain.User;
 import com.example.ensurify.domain.enums.Role;
 import com.example.ensurify.dto.request.LoginRequest;
@@ -28,6 +29,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final TokenProvider tokenProvider;
+    private final ClientService clientService;
 
     private static final Duration ACCESS_TOKEN_DURATION = Duration.ofHours(10);
 
@@ -58,7 +60,9 @@ public class UserService {
      * Guest 계정 생성
      */
     @Transactional
-    public CreateGuestAccountResponse createGuestAccount() {
+    public CreateGuestAccountResponse createGuestAccount(Long clientId) {
+
+        Client client = clientService.findById(clientId);
 
         // username과 password 무작위 생성
         String username = RandomStringUtils.randomAlphanumeric(8); // 8자리 알파벳+숫자 조합
@@ -68,6 +72,7 @@ public class UserService {
                 .username(username)
                 .password(password)
                 .role(Role.GUEST)
+                .client(client)
                 .build();
 
         userRepository.save(user);

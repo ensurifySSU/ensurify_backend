@@ -1,6 +1,7 @@
 package com.example.ensurify.domain;
 
 import com.example.ensurify.domain.common.BaseEntity;
+import com.example.ensurify.domain.mappings.UserMeetingRoom;
 import jakarta.persistence.*;
 import lombok.*;
 
