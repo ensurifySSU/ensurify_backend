@@ -5,6 +5,7 @@ import com.example.ensurify.dto.chatGpt.ChatGptRequest;
 import com.example.ensurify.dto.chatGpt.ChatGptResponse;
 import com.example.ensurify.dto.chatGpt.ChatRequest;
 import com.example.ensurify.dto.chatGpt.ChatResponse;
+import com.example.ensurify.service.OpenAiService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,27 +26,13 @@ import java.security.Principal;
 @Tag(name = "OpenAI", description = "OpenAI 관련 API입니다.")
 public class OpenAiController {
 
-    @Value("${openai.model}")
-    private String model;
-
-    @Value("${openai.api.url}")
-    private String apiURL;
-
-    @Autowired
-    private RestTemplate template;
+    private final OpenAiService openAiService;
 
     @PostMapping("/chat")
     public BasicResponse<ChatResponse> chat(@RequestBody @Valid ChatRequest chatRequest, Principal principal){
         Long userId = Long.parseLong(principal.getName());
 
-
-        ChatGptRequest request = new ChatGptRequest(model, chatRequest.getQuestion());
-        ChatGptResponse chatGPTResponse =  template.postForObject(apiURL, request, ChatGptResponse.class);
-        String answer = chatGPTResponse.getChoices().get(0).getMessage().getContent();
-
-        ChatResponse response = ChatResponse.builder()
-                .answer(answer)
-                .build();
+        ChatResponse response = openAiService.chat(userId, chatRequest);
 
         return BasicResponse.onSuccess(response);
     }
