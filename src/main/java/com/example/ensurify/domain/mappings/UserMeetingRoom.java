@@ -1,4 +1,4 @@
-package com.example.ensurify.domain;
+package com.example.ensurify.domain.mappings;
 
 import com.example.ensurify.domain.MeetingRoom;
 import com.example.ensurify.domain.User;
