@@ -24,6 +24,8 @@ public class CorsConfig {
         allowedOriginPatterns.add("ws://localhost:8080");
         allowedOriginPatterns.add("wss://ensurify.store");
         allowedOriginPatterns.add("https://jiangxy.github.io");
+        allowedOriginPatterns.add("http://192.168.0.77:5173");
+        allowedOriginPatterns.add("https://ensurify.vercel.app");
         configuration.setAllowedOrigins(allowedOriginPatterns);
 
         //허용하는 HTTP METHOD 지정
