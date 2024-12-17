@@ -26,6 +26,7 @@ public class CorsConfig {
         allowedOriginPatterns.add("https://jiangxy.github.io");
         allowedOriginPatterns.add("http://192.168.0.77:5173");
         allowedOriginPatterns.add("https://ensurify.vercel.app");
+        allowedOriginPatterns.add("https://enssurify-bucket.s3.ap-northeast-2.amazonaws.com");
         configuration.setAllowedOrigins(allowedOriginPatterns);
 
         //허용하는 HTTP METHOD 지정
